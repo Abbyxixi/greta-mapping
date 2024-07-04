@@ -5,6 +5,12 @@ def load_xapi_data(file_path):
         xapi_data = json.load(file)
     return xapi_data
 
+def normalize_score(score):
+    min_score = score["min"]
+    max_score = score["max"]
+    raw_score = score["raw"]
+    return (raw_score - min_score) / (max_score - min_score)
+
 def map_activities_to_competencies(xapi_activities, competency_hierarchy, mapping_table_resource):
     # Extract the sub-competency (facet) scores from the xAPI data
     sub_competency_scores = {}
@@ -14,8 +20,8 @@ def map_activities_to_competencies(xapi_activities, competency_hierarchy, mappin
         context = statement["context"]["extensions"]["learningObjectMetadata"]
         facet = context["facet"]
         area = context["area"]
-        main_competency = context["aspect"]
-        score = statement["result"]["score"]["raw"]
+        aspect = context["aspect"]
+        score = normalize_score(statement["result"]["score"])
         competence_path = context["competencePath"]
 
         if facet not in sub_competency_scores:
@@ -25,7 +31,7 @@ def map_activities_to_competencies(xapi_activities, competency_hierarchy, mappin
             sub_competency_resources[facet] = mapping_table_resource[facet]
 
     # Ensure all facets from the hierarchy are included, with default score of 0 if missing
-    for main_competency, areas in competency_hierarchy.items():
+    for aspect, areas in competency_hierarchy.items():
         for area, facets in areas.items():
             for facet in facets:
                 if facet not in sub_competency_scores:
@@ -38,50 +44,50 @@ def map_activities_to_competencies(xapi_activities, competency_hierarchy, mappin
 
     # Calculate the average scores for each area and main competency
     area_averages = {}
-    main_competency_averages = {}
+    aspect_averages = {}
     
-    for main_competency, areas in competency_hierarchy.items():
+    for aspect, areas in competency_hierarchy.items():
         for area, facets in areas.items():
             relevant_scores = [sub_competency_averages[facet] for facet in facets]
             area_averages[area] = sum(relevant_scores)/len(relevant_scores) if relevant_scores else 0
         
         relevant_area_scores = [area_averages[area] for area in areas]
-        main_competency_averages[main_competency] = sum(relevant_area_scores)/len(relevant_area_scores) if relevant_area_scores else 0
+        aspect_averages[aspect] = sum(relevant_area_scores)/len(relevant_area_scores) if relevant_area_scores else 0
 
     # Create the GRETA competencies structure with full paths and scores
-    greta_competencies = [
-        {"id": f"{main_competency}/{area}/{facet}", "achievement": sub_competency_averages[facet]}
-        for main_competency, areas in competency_hierarchy.items()
+    facet_scores = [
+        {"id": f"{aspect}/{area}/{facet}", "achievement": sub_competency_averages[facet]}
+        for aspect, areas in competency_hierarchy.items()
         for area, facets in areas.items()
         for facet in facets
     ]
     
     # Create the area and main competency scores structure
     area_scores = [
-        {"id": f"{main_competency}/{area}", "achievement": area_averages[area]}
-        for main_competency, areas in competency_hierarchy.items()
+        {"id": f"{aspect}/{area}", "achievement": area_averages[area]}
+        for aspect, areas in competency_hierarchy.items()
         for area in areas
     ]
     
-    main_competency_scores = [
-        {"id": f"{main_competency}", "achievement": main_competency_averages[main_competency]}
-        for main_competency in competency_hierarchy
+    aspect_scores = [
+        {"id": f"{aspect}", "achievement": aspect_averages[aspect]}
+        for aspect in competency_hierarchy
     ]
 
-    # Find the sub-competencies (facets) with scores below 3 and provide learning resource links
+    # Find the sub-competencies (facets) with scores below 0.5 and provide learning resource links
     low_score_links = []
     added_links = set()
     
     for facet, score in sub_competency_averages.items():
-        if score < 3:
-            competence_path = sub_competency_resources[facet]
+        if score < 0.5:  # Adjust this threshold as needed
+            competence_path = mapping_table_resource[facet]
             link = {"id": f"{facet}", "link": competence_path}
             link_tuple = (link["id"], link["link"])
             if link_tuple not in added_links:
                 low_score_links.append(link)
                 added_links.add(link_tuple)
     
-    return greta_competencies, area_scores, main_competency_scores, low_score_links
+    return facet_scores, area_scores, aspect_scores, low_score_links
 
 # Example usage:
 xapi_file_path = 'greta_xapi_example1.json'
@@ -130,14 +136,16 @@ competency_hierarchy = {
         "Beratung / individualisierte Lernunterstützung": [
             "Diagnostik und Lernberatung",
             "Teilnehmendenorientierung"
-        ]
+        ],
+        "Fachdidatik":[]
     },
     "Fach- und feldspezifisches Wissen": {
         "Feldbezug": [
             "Curriculare und institutionelle Rahmenbedingungen",
             "Feldspezifisches Wissen",
             "Adressaten und Adressaten"
-        ]
+        ],
+        "Fachinhalt":[]
     }
 }
 
@@ -165,24 +173,36 @@ mapping_table_resource = {
     "Curriculare und institutionelle Rahmenbedingungen": "http://example.com/Curriculare",
     "Feldspezifisches Wissen": "http://example.com/Feldspezifisches",
     "Adressaten und Adressaten": "http://example.com/Adressaten",
-
 }
-greta_competencies, area_scores, main_competency_scores, low_score_links = map_activities_to_competencies(xapi_activities, competency_hierarchy, mapping_table_resource)
 
-print("GRETA Competencies:")
-print(len(greta_competencies))
-for competency in greta_competencies:
-    print(competency)
+facet_scores, area_scores, aspect_scores, low_score_links = map_activities_to_competencies(xapi_activities, competency_hierarchy, mapping_table_resource)
+
+output_data = {
+    "Facet Scores": facet_scores,
+    "Area Scores": area_scores,
+    "Aspect Scores": aspect_scores,
+    #"Low Score Links": low_score_links
+}
+
+with open('greta_results.json', 'w', encoding='utf-8') as f:
+    json.dump(output_data, f, ensure_ascii=False, indent=4)
+
+'''
+print("Facet Scores:")
+print(len(facet_scores))
+for facet_score in facet_scores:
+    print(facet_score)
 
 print("\nArea Scores:")
 for area_score in area_scores:
     print(area_score)
 
-print("\nMain Competency Scores:")
-for main_competency_score in main_competency_scores:
-    print(main_competency_score)
+print("\nAspect Scores:")
+for aspect_score in aspect_scores:
+    print(aspect_score)
 
 print("\nLow Score Links:")
 print(len(low_score_links))
 for link in low_score_links:
     print(link)
+'''

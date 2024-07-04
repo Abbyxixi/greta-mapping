@@ -1,0 +1,164 @@
+{
+    "Facet Scores": [
+        {
+            "id": "Professionelle Selbststeuerung/Motivationale Orientierungen/Enthusiasmus",
+            "achievement": 0.25
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Motivationale Orientierungen/Selbstwirksamkeitsüberzeugungen",
+            "achievement": 0.9
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Selbstregulation/Engagement und Distanz",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Selbstregulation/Umgang mit Feedback und Kritik",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Berufspraktische Erfahrungen/Reflexion des eigenen Lehrhandelns",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Berufspraktische Erfahrungen/Berufliche Weiterentwicklung",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen/Berufsethos/Menschenbilder",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen/Berufsethos/Wertvorstellungen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen/Fachbezogene Überzeugungen/Eigenes Rollenbewusstsein",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen/Fachbezogene Überzeugungen/Subjektive Annahmen über das Lehren und Lernen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Organisation/Kooperation mit Eltern",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Organisation/Kollegiale Zusammenarbeit und Netzwerken",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Didaktik und Methodik/Lerninhalte und -ziele",
+            "achievement": 0.55
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Didaktik und Methodik/Methoden, Medien und Materialien",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Didaktik und Methodik/Outcomeorientierung",
+            "achievement": 0.8500000000000001
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Didaktik und Methodik/Rahmenbedingungen und Lernumgebungen",
+            "achievement": 0.6499999999999999
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Kommunikation und Interaktion/Moderation und Steuerung von Gruppen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Kommunikation und Interaktion/Professionelle Kommunikation",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Beratung / individualisierte Lernunterstützung/Diagnostik und Lernberatung",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Beratung / individualisierte Lernunterstützung/Teilnehmendenorientierung",
+            "achievement": 0.6666666666666666
+        },
+        {
+            "id": "Fach- und feldspezifisches Wissen/Feldbezug/Curriculare und institutionelle Rahmenbedingungen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Fach- und feldspezifisches Wissen/Feldbezug/Feldspezifisches Wissen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Fach- und feldspezifisches Wissen/Feldbezug/Adressaten und Adressaten",
+            "achievement": 0.0
+        }
+    ],
+    "Area Scores": [
+        {
+            "id": "Professionelle Selbststeuerung/Motivationale Orientierungen",
+            "achievement": 0.575
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Selbstregulation",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Selbststeuerung/Berufspraktische Erfahrungen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen/Berufsethos",
+            "achievement": 0.0
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen/Fachbezogene Überzeugungen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Organisation",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Didaktik und Methodik",
+            "achievement": 0.5125
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Kommunikation und Interaktion",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Beratung / individualisierte Lernunterstützung",
+            "achievement": 0.3333333333333333
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können/Fachdidatik",
+            "achievement": 0
+        },
+        {
+            "id": "Fach- und feldspezifisches Wissen/Feldbezug",
+            "achievement": 0.0
+        },
+        {
+            "id": "Fach- und feldspezifisches Wissen/Fachinhalt",
+            "achievement": 0
+        }
+    ],
+    "Aspect Scores": [
+        {
+            "id": "Professionelle Selbststeuerung",
+            "achievement": 0.19166666666666665
+        },
+        {
+            "id": "Professionelle Werteshaltungen und Überzeugungen",
+            "achievement": 0.0
+        },
+        {
+            "id": "Berufspraktisches Wissen und Können",
+            "achievement": 0.16916666666666663
+        },
+        {
+            "id": "Fach- und feldspezifisches Wissen",
+            "achievement": 0.0
+        }
+    ]
+}
