@@ -122,7 +122,7 @@ labels3 = [split_text(label, 15) for label in labels3]
 fig, ax = plt.subplots(figsize=(12, 12))
 
 # 第一层环形图
-wedges1, texts1 = ax.pie(sizes1, colors=colors1, radius=1.35, startangle=90, wedgeprops=dict(width=0.3, edgecolor='w'))
+wedges1, texts1 = ax.pie(sizes1, colors=colors1, radius=1.3, startangle=90, wedgeprops=dict(width=0.25, edgecolor='w'))
 
 # 第二层环形图
 wedges2, texts2 = ax.pie(sizes2, colors=colors2, radius=1.05, startangle=90, wedgeprops=dict(width=0.5, edgecolor='w'))
